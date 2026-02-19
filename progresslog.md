@@ -1,3 +1,15 @@
+### Feb 19: 
+```yarn run start```
+
+feature add:
+- total profits across all accounts (or selected accounts)
+- summary page first
+  - with all accounts current standing
+  - recent transactions, gain loss on recent stock transactions
+  - different section for most recent month of dividends
+    - click in to show different dividends
+    - potentially evaluate the valuation of dividends and if u can make more money on this dividends, otherwise, it's the same as a cash account
+
 ### Jan 22:
 main.js        → owns the data
 preload.js    → exposes safe API
