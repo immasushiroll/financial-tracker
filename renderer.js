@@ -65,3 +65,12 @@ async function loadTable() {
 }
 
 loadTable();
+
+document.getElementById('ocr-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const file = document.getElementById('image_upload').files[0];
+  const buffer = await file.arrayBuffer();
+
+  const result = await window.api.extractText(buffer); // <-- not fetch()!
+  document.getElementById('extracted-text').textContent = result.text;
+});

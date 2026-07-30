@@ -10,57 +10,101 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Baloo+2:wght@500;600;700;800&display=swap" rel="stylesheet">
     <title>Financial-Tracker-App</title>
   </head>
 
   <body>
-    <h1>㊗️🌼financial tracker🍊🧧</h1>
-    <h1>ദ്ദി（• ˕ •マ.ᐟ</h1>
-    <p>👋hi dad, i hope this helps!</p>
-    <p> input your new transactions below:</p>
+    <div class="page-wrap">
 
-    <form action="writer.py" method="POST">
-        <label for="name">Name</label><br>
-        <select type="select" id="name_test" name="name_test">
-          <option>Xu_TD</option>
-          <option>Xu_WS</option>
-          <option>Jin_TD</option>
-          <option>Yu_TD</option>
-          <option>Jia_TD</option>
-          <option>Jia_WS</option>
-        </select><br>
+      <header class="site-header">
+        <span class="seal">㊗️</span>
+        <h1>🌼financial tracker🍊🧧</h1>
+        <h1 class="subtitle">ദ്ദി（• ˕ •マ.ᐟ</h1>
+        <p>👋 hi dad, i hope this helps!</p>
+        <p>input your new transactions below:</p>
+      </header>
 
-        <label for="portfolio">Portfolio</label><br>
-        <select type="select" id="portfolio_test" name="portfolio_test">
-            <option>USD_TFSA</option>
-            <option>USD_CASH</option>
-            <option>CAD_TFSA</option>
-            <option>CAD_SDRSP</option>
-            <option>CAD_SAVING</option>
-        </select><br>
+      <section class="card">
+        <h2>📄 extract text from a PNG</h2>
+        <form id="ocr-form">
+          <div class="field full">
+            <label for="image_upload">Upload a PNG</label>
+            <input type="file" id="image_upload" name="image" accept="image/png">
+          </div>
+          <div class="field full btn-row">
+            <button type="submit" id="extract-btn" class="btn-primary">extract text</button>
+          </div>
+        </form>
 
-        <label for="buy/sell">Buy/Sell</label><br>
-        <select type="select" id="buy/sell_test" name="buy/sell_test">
-            <option value="buy">B</option>
-            <option value="sell">S</option>
-        </select><br>
+        <div id="ocr-result">
+          <h3>Extracted Text</h3>
+          <pre id="extracted-text"></pre>
+        </div>
+      </section>
 
-        <label for="amount">Amount</label><br>
-        <input type="text" id="amount" name="amount" placeholder="enter amount"><br>
+      <section class="card">
+        <h2>📝 new transaction</h2>
+        <form action="writer.py" method="POST">
+          <div class="field">
+            <label for="name_test">Name</label>
+            <select id="name_test" name="name_test">
+              <option>Xu_TD</option>
+              <option>Xu_WS</option>
+              <option>Jin_TD</option>
+              <option>Yu_TD</option>
+              <option>Jia_TD</option>
+              <option>Jia_WS</option>
+            </select>
+          </div>
 
-        <label for="price">Price</label><br>
-        <input type="text" id="price" name="price" placeholder="enter price"><br>
+          <div class="field">
+            <label for="portfolio_test">Portfolio</label>
+            <select id="portfolio_test" name="portfolio_test">
+              <option>USD_TFSA</option>
+              <option>USD_CASH</option>
+              <option>CAD_TFSA</option>
+              <option>CAD_SDRSP</option>
+              <option>CAD_SAVING</option>
+            </select>
+          </div>
 
-        <label for="finalbuyprice">Final Buy Price</label><br>
-        <input type="text" id="finalbuyprice" name="finalbuyprice" placeholder="enter final buy price"><br>   
+          <div class="field">
+            <label for="buy/sell_test">Buy/Sell</label>
+            <select id="buy/sell_test" name="buy/sell_test">
+              <option value="buy">B</option>
+              <option value="sell">S</option>
+            </select>
+          </div>
 
-        <label for="stockcode">Stock Code</label><br>        
-        <input type="text" id="stockcode" name="stockcode" placeholder="put the stock's code i.e. NVD"><br>
-    </form>
+          <div class="field">
+            <label for="stockcode">Stock Code</label>
+            <input type="text" id="stockcode" name="stockcode" placeholder="e.g. NVD">
+          </div>
 
-    <button id="write"> process transaction </button>
-    <button id="router"> click to see all your transactions </button>
+          <div class="field">
+            <label for="amount">Amount</label>
+            <input type="text" id="amount" name="amount" placeholder="enter amount">
+          </div>
+
+          <div class="field">
+            <label for="price">Price</label>
+            <input type="text" id="price" name="price" placeholder="enter price">
+          </div>
+
+          <div class="field full">
+            <label for="finalbuyprice">Final Buy Price</label>
+            <input type="text" id="finalbuyprice" name="finalbuyprice" placeholder="enter final buy price">
+          </div>
+
+          <div class="field full btn-row">
+            <button type="submit" id="write" class="btn-primary">process transaction</button>
+            <button type="button" id="router" class="btn-secondary">see all your transactions</button>
+          </div>
+        </form>
+      </section>
+
+    </div>
   </body>
   <script src="./renderer.js"></script>
 </html>

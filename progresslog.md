@@ -1,3 +1,24 @@
+### Jul 30:
+Looking into image uploads instead, just for smoother UX.
+ah yes ty claude for the breakdown
+┌─────────────────────────┐        ┌──────────────────────────┐
+│   RENDERER PROCESS       │        │      MAIN PROCESS         │
+│   (your index.html,      │        │      (main.js)            │
+│   style.css, renderer.js)│        │                            │
+│                           │        │  - full Node.js access    │
+│   - basically a sandboxed │        │  - creates BrowserWindow  │
+│     Chrome tab            │        │  - can spawn child        │
+│   - NO direct Node.js,    │        │    processes (Python!)    │
+│     NO filesystem access  │        │  - NO access to the DOM   │
+└───────────┬───────────────┘        └─────────────┬────────────┘
+            │                                       │
+            │        ┌──────────────────┐           │
+            └───────▶│   preload.js      │◀──────────┘
+                      │  (contextBridge)  │
+                      │  the ONLY bridge  │
+                      │  between the two  │
+                      └──────────────────┘
+
 ### Feb 19: 
 ```yarn run start```
 

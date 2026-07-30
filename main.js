@@ -1,6 +1,7 @@
 console.log("mainjs loaded");
 
 const { app, BrowserWindow, ipcMain } = require("electron/main");
+const { execFile } = require('child_process');
 const fs = require("fs");
 const path = require("path");
 
@@ -73,4 +74,15 @@ ipcMain.handle("get-transactions-json", async () => {
 
 app.on("window-all-closed", () => {
     app.quit();
+});
+
+ipcMain.handle('extract-text', async (event, imageBuffer) => {
+    // write buffer to a temp file, then call your python script
+    console.log("extracting text...");
+    return new Promise((resolve, reject) => {
+    execFile('python3', ['writer.py', '--extract', tempImagePath], (err, stdout) => {
+        if (err) return reject(err);
+        resolve({ text: stdout });
+    });
+    });
 });
