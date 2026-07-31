@@ -24,6 +24,8 @@ import json
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from google import genai
+
 
 TRANSACTIONS_FILENAME = "transactions.csv"
 CSV_FIELDS = [
@@ -100,6 +102,19 @@ def handle_transaction(args):
 
     succeed({"written_to": str(csv_path), "row": row})
 
+def clean_text(text):
+    client = genai.Client()
+
+    interaction = client.interactions.create(
+        model="gemini-3.6-flash",
+        input=f"put this in a cleaner json format, make no other comments:\n {text}"     #TODO: CHANGE THIS TO A PROMPT FILE
+    )
+
+    print(interaction.output_text)
+
+test = '''{"success": true, "data": {"text": "Stats\n\nBid 17696\nAsk 176.97\nLast 176.97\nSale\n\nOpen 177.00\nHigh 177.09\nLow 176.25\n\nExchan NASDA\nge Q\n\nNews\n\n8hago\n\nMkt cap\nP/E\n\n52w\nhigh\n\n52w\nlow\n\nVol\nAvg vol\n\nYield\n\n2.73T\n29.32\n\n198.23\n\n12417\n\n6M\n\n49.82M\n\n0.54%\n\nView all\n\n"}}'''
+
+clean_text(test)
 
 def handle_extract(args):
     try:
