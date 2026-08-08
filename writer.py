@@ -21,11 +21,14 @@ Usage:
 import argparse
 import csv
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from google import genai
+from dotenv import load_dotenv
 
+load_dotenv()
 
 TRANSACTIONS_FILENAME = "transactions.csv"
 CSV_FIELDS = [
@@ -101,9 +104,9 @@ def handle_transaction(args):
         fail(f"Could not write to {csv_path}: {e}")
 
     succeed({"written_to": str(csv_path), "row": row})
-
+    
 def clean_text(text):
-    client = genai.Client()
+    client = genai.Client(api_key=os.getenv("GENAI_API_KEY"))
 
     interaction = client.interactions.create(
         model="gemini-3.6-flash",
@@ -112,9 +115,9 @@ def clean_text(text):
 
     print(interaction.output_text)
 
-test = '''{"success": true, "data": {"text": "Stats\n\nBid 17696\nAsk 176.97\nLast 176.97\nSale\n\nOpen 177.00\nHigh 177.09\nLow 176.25\n\nExchan NASDA\nge Q\n\nNews\n\n8hago\n\nMkt cap\nP/E\n\n52w\nhigh\n\n52w\nlow\n\nVol\nAvg vol\n\nYield\n\n2.73T\n29.32\n\n198.23\n\n12417\n\n6M\n\n49.82M\n\n0.54%\n\nView all\n\n"}}'''
+# test = '''{"success": true, "data": {"text": "Stats\n\nBid 17696\nAsk 176.97\nLast 176.97\nSale\n\nOpen 177.00\nHigh 177.09\nLow 176.25\n\nExchan NASDA\nge Q\n\nNews\n\n8hago\n\nMkt cap\nP/E\n\n52w\nhigh\n\n52w\nlow\n\nVol\nAvg vol\n\nYield\n\n2.73T\n29.32\n\n198.23\n\n12417\n\n6M\n\n49.82M\n\n0.54%\n\nView all\n\n"}}'''
 
-clean_text(test)
+# clean_text(test)
 
 def handle_extract(args):
     try:
@@ -169,11 +172,11 @@ def build_parser():
     return parser
 
 
-def main():
-    parser = build_parser()
-    args = parser.parse_args()
-    args.func(args)
+# def main():
+#     parser = build_parser()
+#     args = parser.parse_args()
+#     args.func(args)
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

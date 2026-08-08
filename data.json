@@ -128,5 +128,15 @@
     "FinalBuyPrice": 314324,
     "StockCode": "DFSDF",
     "Timestamp": "2026-01-23T00:17:08.796Z"
+  },
+  {
+    "Name": "Xu_TD",
+    "Portfolio": "USD_TFSA",
+    "BuySell": "buy",
+    "Amount": 456,
+    "Price": 456,
+    "FinalBuyPrice": 6767,
+    "StockCode": "DOGE",
+    "Timestamp": "2026-08-08T00:56:43.269Z"
   }
 ]
